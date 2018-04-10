@@ -25,7 +25,6 @@ namespace vega.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
         {
-            throw new Exception();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -86,10 +85,11 @@ namespace vega.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VehicleResource>> GetVehicles()
+        public async Task<QueryResultResource<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
-            var vehicles = await this.vehicleRepository.GetVehicles();
-            return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
+            var vehicleQuery = mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);
+            var queryResult = await this.vehicleRepository.GetVehicles(vehicleQuery);
+            return mapper.Map<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>(queryResult);
         }
     }
 }
