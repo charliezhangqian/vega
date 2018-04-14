@@ -22,6 +22,7 @@ namespace vega.Mapping
                 .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(f => f.Feature)))
                 .ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make));
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
+            CreateMap<Photo, PhotoResource>();
 
             // API resource to domain
             CreateMap<SaveVehicleResource, Vehicle>()

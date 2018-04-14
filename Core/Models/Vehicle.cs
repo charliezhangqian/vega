@@ -23,5 +23,6 @@ namespace vega.Core.Models
         public string ContactEmail { get; set; }
         public DateTime LastUpdated { get; set; }
         public ICollection<VehicleFeature> Features { get; set; } = new Collection<VehicleFeature>();
+        public ICollection<Photo> Photos { get; set; } = new Collection<Photo>();
     }
 }
